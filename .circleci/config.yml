@@ -227,6 +227,7 @@ jobs:
           name: Run migrations
           command: |
             cd ~/project/backend 
+            npm cache clean --force
             npm install typescript
             npm install
             npm audit fix --audit-level=critical --force
