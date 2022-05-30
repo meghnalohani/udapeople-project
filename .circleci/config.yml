@@ -19,7 +19,7 @@ commands:
             aws cloudformation delete-stack --stack-name udapeople-backend-<< parameters.id >>
           when: on_fail
   revert-migrations:
-    description: Revert the last migration if successfully run in the current workflow.    
+    description: Revert the last migration if successfully run in the current workflow.
     steps:
       - run:
           name: Revert migrations
@@ -32,7 +32,7 @@ commands:
               cd ~/project/backend
               npm install
               npm run migrations:revert
-            fi 
+            fi
 jobs:
   build-frontend:
     docker:
@@ -236,7 +236,7 @@ jobs:
       - run:
           name: Send migration status
           command: |
-          cd ~/project/backend
+            cd ~/project/backend
             if grep -q "has been executed successfully." migrations_dump.txt
             then
               echo "Migration is successful"
@@ -345,7 +345,7 @@ jobs:
                 return 0
             else
                 return 1
-            fi       
+            fi
       - run:
           name: Frontend smoke test.
           command: |
