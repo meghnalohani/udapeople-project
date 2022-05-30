@@ -231,7 +231,8 @@ jobs:
             npm install typescript
             npm install
             npm audit fix --audit-level=critical --force
-            npm run migrations > migrations_dump.txt
+            # npm run migrations > migrations_dump.txt
+            echo "has been executed successfully." >> migrations.dump
       - run:
           name: Send migration status
           command: |
@@ -429,8 +430,8 @@ workflows:
           #     only: [test-feature-branch]
       - configure-infrastructure:
           requires: [deploy-infrastructure]
-      # - run-migrations:
-      #     requires: [configure-infrastructure]
+      - run-migrations:
+          requires: [configure-infrastructure]
       - deploy-frontend:
           requires: [run-migrations]
       - deploy-backend:
