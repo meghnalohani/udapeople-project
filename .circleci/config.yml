@@ -7,17 +7,13 @@ commands:
         type: string
     steps:
       - run:
-          name: Destroy udapeople backend cloud-formation stack
-          command: |
-            aws cloudformation delete-stack --stack-name udapeople-backend-<< parameters.id >>
-          when: on_fail
-      - run:
           name: Destroy udapeople frontend cloudformation stack
+          when: on_fail
           command: |
             aws s3 rm s3://udapeople-<< parameters.id >> --recursive
             aws cloudformation delete-stack --stack-name udapeople-frontend-<< parameters.id >>
             aws cloudformation delete-stack --stack-name udapeople-backend-<< parameters.id >>
-          when: on_fail
+
   revert-migrations:
     description: Revert the last migration if successfully run in the current workflow.
     steps:
@@ -231,6 +227,7 @@ jobs:
           name: Run migrations
           command: |
             cd ~/project/backend 
+            npm install typescript
             npm install
             npm audit fix
             npm run migrations > migrations_dump.txt
