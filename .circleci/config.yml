@@ -229,7 +229,7 @@ jobs:
             cd ~/project/backend 
             npm install typescript
             npm install
-            npm audit fix
+            npm audit fix --audit-level=critical --force
             npm run migrations > migrations_dump.txt
       - run:
           name: Send migration status
