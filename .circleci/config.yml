@@ -315,7 +315,7 @@ jobs:
       # Here's where you will add some code to rollback on failure
       - destroy-environment:
           id: ${CIRCLE_WORKFLOW_ID:0:7}
-      - revert_migrations
+      - revert-migrations
   smoke-test:
     docker:
       # Lightweight Docker image
