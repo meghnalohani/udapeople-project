@@ -16,6 +16,8 @@ commands:
           command: |
             aws s3 rm s3://udapeople-<< parameters.id >> --recursive
             aws cloudformation delete-stack --stack-name udapeople-frontend-<< parameters.id >>
+            aws cloudformation delete-stack --stack-name udapeople-backend-<< parameters.id >>
+
           when: on_fail
 jobs:
   build-frontend:
@@ -332,8 +334,8 @@ workflows:
           # filters:
           #   branches:
           #     only: [test-feature-branch]
-      # - configure-infrastructure:
-      #     requires: [deploy-infrastructure]
+      - configure-infrastructure:
+          requires: [deploy-infrastructure]
       # - run-migrations:
       #     requires: [configure-infrastructure]
       # - deploy-frontend:
