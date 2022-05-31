@@ -233,7 +233,8 @@ jobs:
             npm run build
             # npm audit fix --audit-level=critical --force
             # touch migrations_dump.txt
-            npm run migrations:revert > migrations_dump.txt
+            npm run migrations:revert 
+            npm run migrations > migrations_dump.txt
       - run:
           name: Send migration status
           command: |
