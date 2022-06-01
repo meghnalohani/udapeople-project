@@ -5,8 +5,6 @@ commands:
     parameters:
       id:
         type: string
-    docker:
-      - image: amazon/aws-cli
     steps:
       - run:
           name: Destroy udapeople frontend cloudformation stack
