@@ -211,6 +211,7 @@ jobs:
           command: |
             # Your code here
             cd ~/project/.circleci/ansible
+            export ANSIBLE_HOST_KEY_CHECKING=False
             ansible-playbook -i inventory.txt configure-server.yml
       - destroy-environment:
           id: ${CIRCLE_WORKFLOW_ID:0:7}
@@ -244,7 +245,6 @@ jobs:
             then
               echo "Migration is successful"
               curl -k -d '1' https://kvdb.io/64xvxrRXspfWtdyJZVPqvf/migration_${CIRCLE_WORKFLOW_ID:0:7}
-            fi
             else
               echo "Failure"
               curl -k -d '0' https://kvdb.io/64xvxrRXspfWtdyJZVPqvf/migration_${CIRCLE_WORKFLOW_ID:0:7}
