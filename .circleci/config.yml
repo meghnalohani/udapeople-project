@@ -241,7 +241,7 @@ jobs:
           name: Send migration status
           command: |
             cd ~/project/backend
-            if grep -q "has been executed successfully." migrations_dump.txt
+            if grep -q "No migrations are pending" migrations_dump.txt
             then
               echo "Migration is successful"
               curl -k -d '1' https://kvdb.io/64xvxrRXspfWtdyJZVPqvf/migration_${CIRCLE_WORKFLOW_ID:0:7}
