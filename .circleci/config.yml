@@ -328,6 +328,10 @@ jobs:
             pip install awscli
             aws --version
       - run:
+          name: compress backend
+          command: |
+            tar -C ~/project/backend -czvf artifact.tar.gz
+      - run:
           name: Deploy backend
           command: |
             cd ~/project/.circleci/ansible

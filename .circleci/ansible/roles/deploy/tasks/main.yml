@@ -19,12 +19,25 @@
     global: yes
     production: yes
     state: present
-- name: "copy the code into ec2 instance"
+
+- name: copy dist backend folder to ec2 server
   become: yes
-  synchronize:
-    src: /root/project/backend
-    dest: /home/ubuntu
-    recursive: true
+  copy:
+    src: ~/project/artifact.tar.gz
+    dest: /home/ubuntu/artifact.tar.gz
+
+- name: prepare binaries
+  become: true
+  shell: |
+    cd /home/ubuntu
+    tar xvzf artifact.tar.gz -C
+
+# - name: "copy the code into ec2 instance"
+#   become: yes
+#   synchronize:
+#     src: /root/project/backend
+#     dest: /home/ubuntu
+#     recursive: true
 
 - name: "install npm packages"
   become: true
