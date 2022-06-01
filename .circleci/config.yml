@@ -180,7 +180,7 @@ jobs:
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
               --output text)
             echo "$BACKEND_IP" >> ~/project/.circleci/ansible/inventory.txt
-            echo "ansible_ssh_common_args='/-o StrictHostKeyChecking=no'/" >> ~/project/.circleci/ansible/inventory.txt
+            echo "ansible_ssh_common_args='-o StrictHostKeyChecking=no'" >> ~/project/.circleci/ansible/inventory.txt
             cat ~/project/.circleci/ansible/inventory.txt
       - persist_to_workspace:
           root: ~/
