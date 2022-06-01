@@ -261,6 +261,7 @@ jobs:
           command: |
             yum install -y gcc-c++ make
             yum install sudo -y
+            yum install -y tar gzip
             curl -sL https://rpm.nodesource.com/setup_13.x | sudo -E bash - 
             yum install -y nodejs
             cd ~/project/frontend
