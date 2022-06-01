@@ -285,6 +285,8 @@ jobs:
               --output text)
             export API_URL="http://${BACKEND_IP}:3030"
             echo "API_URL = ${API_URL}"
+            cd ~/project/frontend
+            npm run build
       - run:
           name: Deploy frontend objects
           command: |
