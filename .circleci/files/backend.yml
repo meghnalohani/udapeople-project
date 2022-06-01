@@ -21,6 +21,9 @@ Resources:
           FromPort: 3030
           ToPort: 3030
           CidrIp: 0.0.0.0/0
+      Tags:
+        - Key: Name
+          Value: !Sub sg-udapeople-${ID}
 
   EC2Instance:
     Type: AWS::EC2::Instance

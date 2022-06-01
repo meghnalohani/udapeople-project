@@ -1,4 +1,20 @@
 ---
+- name: "upgrade packages."
+  become: true
+  apt:
+    upgrade: "yes"
+- name: "install dependencies."
+  become: true
+  apt:
+    name: ["nodejs", "npm"]
+    update_cache: yes
+- name: "install pm2"
+  become: true
+  npm:
+    name: pm2
+    global: yes
+    production: yes
+    state: present
 - name: "copy the code into ec2 instance"
   become: yes
   synchronize:
@@ -6,12 +22,17 @@
     dest: /home/ubuntu
     recursive: true
 
-- name: "run backend"
+- name: "install npm packages"
   become: true
   shell: |
-    cd home/ubuntu/backend
     npm install
     npm run build
+  args:
+    chdir: /home/ubuntu/backend
+
+- name: "compile npm packages"
+  become: true
+  command: npm run build
   args:
     chdir: /home/ubuntu/backend
 
@@ -19,8 +40,8 @@
   become: true
   shell: |
     # pm2 start -f ./main.js
-    pm2 stop default
-    pm2 start npm -- start
+    # pm2 stop default
+    pm2 start npm -- run start
   args:
     chdir: /home/ubuntu/backend/dist
   environment:
