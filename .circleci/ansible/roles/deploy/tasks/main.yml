@@ -42,9 +42,9 @@
 - name: "change ownership of node modules"
   become: yes
   shell: |
-    sudo chown -R ubuntu: node_modules
+    sudo chown -R ubuntu: backend
   args:
-    chdir: /home/ubuntu/backend
+    chdir: /home/ubuntu
 
 - name: "install npm packages"
   become: true
