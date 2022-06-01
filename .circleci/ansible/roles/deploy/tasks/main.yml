@@ -5,7 +5,6 @@
     src: /root/project/backend
     dest: /home/ubuntu
     recursive: true
-  timeout: 30
 
 - name: "run backend"
   become: true

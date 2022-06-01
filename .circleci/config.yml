@@ -23,7 +23,7 @@ commands:
           command: |
             VALUE=$(curl -k https://kvdb.io/64xvxrRXspfWtdyJZVPqvf/migration_${CIRCLE_WORKFLOW_ID:0:7})
             echo $VALUE
-            if[$VALUE==1]
+            if[$VALUE -eq 1]
             then
               cd ~/project/backend
               npm install
