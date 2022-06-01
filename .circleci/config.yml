@@ -265,6 +265,7 @@ jobs:
             yum install -y nodejs
             cd ~/project/frontend
             npm install
+
       - run:
           name: Get backend url
           command: |
@@ -283,7 +284,7 @@ jobs:
             npm install
             npm run build
             #creates an artifact-workflowid and zipps it
-            # tar -czvf artifact-"${CIRCLE_WORKFLOW_ID:0:7}".tar.gz dist
+            #tar -czvf artifact-"${CIRCLE_WORKFLOW_ID:0:7}".tar.gz dist
             #copy zipped artifact in s3 bucket
             aws s3 cp ~/dist "s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7}" --recursive
       # Here's where you will add some code to rollback on failure
