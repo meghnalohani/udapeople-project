@@ -1,7 +1,7 @@
 ---
 - name: "create directory"
   file:
-    path: /home/bubuntu/backend
+    path: /home/ubuntu/backend
     state: directory
 - name: "upgrade packages."
   become: true
