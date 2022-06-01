@@ -43,6 +43,7 @@
   become: yes
   shell: |
     sudo chown -R ubuntu: backend
+    sudo chmod -R a+rwx backend
   args:
     chdir: /home/ubuntu
 
@@ -65,7 +66,8 @@
   shell: |
     # pm2 start -f ./main.js
     # pm2 stop default
-    pm2 start npm -- run start
+    # pm2 start npm -- run start
+    pm2 start -f ./main.js
   args:
     chdir: /home/ubuntu/backend/dist
 
