@@ -39,6 +39,13 @@
     dest: /home/ubuntu
     recursive: true
 
+- name: "change ownership of node modules"
+  become: yes
+  shell: |
+    sudo chown -R ubuntu: node_modules
+  args:
+    chdir: /home/ubuntu/backend
+
 - name: "install npm packages"
   become: true
   shell: |
