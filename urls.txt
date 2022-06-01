@@ -1,1 +1,3 @@
 [URL01]-https://github.com/meghnalohani/udapeople-project
+URL02 - https://udapeople-c6ce192.s3.amazonaws.com/index.html
+(this was when the smoke test failed intentionally)
