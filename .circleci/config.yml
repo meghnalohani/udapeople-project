@@ -5,6 +5,8 @@ commands:
     parameters:
       id:
         type: string
+    docker:
+      - image: amazon/aws-cli
     steps:
       - run:
           name: Destroy udapeople frontend cloudformation stack
@@ -21,7 +23,7 @@ commands:
           name: Revert migrations
           when: on_fail
           command: |
-            VALUE=$(curl https://kvdb.io/64xvxrRXspfWtdyJZVPqvf/migration_${CIRCLE_WORKFLOW_ID:0:7})
+            VALUE=$(curl -k https://kvdb.io/64xvxrRXspfWtdyJZVPqvf/migration_${CIRCLE_WORKFLOW_ID:0:7})
             echo $VALUE
             if[$VALUE==1]
             then
@@ -242,7 +244,7 @@ jobs:
             if grep -q "has been executed successfully." migrations_dump.txt
             then
               echo "Migration is successful"
-              curl -d '1' https://kvdb.io/64xvxrRXspfWtdyJZVPqvf/migration_${CIRCLE_WORKFLOW_ID:0:7}
+              curl -k -d '1' https://kvdb.io/64xvxrRXspfWtdyJZVPqvf/migration_${CIRCLE_WORKFLOW_ID:0:7}
             fi
       #Here's where you will add some code to rollback on failure
       - destroy-environment:
