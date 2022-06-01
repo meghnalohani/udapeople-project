@@ -23,7 +23,7 @@ commands:
           command: |
             VALUE=$(curl -k https://kvdb.io/64xvxrRXspfWtdyJZVPqvf/migration_${CIRCLE_WORKFLOW_ID:0:7})
             echo $VALUE
-            if[$VALUE -eq 1]
+            if [[ $VALUE -eq 1 ]]
             then
               cd ~/project/backend
               npm install
@@ -180,6 +180,7 @@ jobs:
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
               --output text)
             echo "$BACKEND_IP" >> ~/project/.circleci/ansible/inventory.txt
+            echo "ansible_ssh_common_args='/-o StrictHostKeyChecking=no'/" >> ~/project/.circleci/ansible/inventory.txt
             cat ~/project/.circleci/ansible/inventory.txt
       - persist_to_workspace:
           root: ~/
@@ -284,7 +285,7 @@ jobs:
               --filters "Name=tag:project,Values=udacity-backend-${CIRCLE_WORKFLOW_ID:0:7}" \
               --output text)
             export API_URL="http://${BACKEND_IP}:3030"
-            echo "API_URL = ${API_URL}" > ~project/frontend/.env
+            echo "API_URL = ${API_URL}" > ~/project/frontend/.env
             cd ~/project/frontend
             npm run build
       - run:
