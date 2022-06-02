@@ -432,14 +432,14 @@ jobs:
             export STACKS=($(aws cloudformation list-stacks --query "StackSummaries[*].StackName" \
                 --stack-status-filter CREATE_COMPLETE --no-paginate --output text)) 
             echo Stack names: "${STACKS[@]}"
-      - run:
-          name: Remove old stacks and files
+       run:
+          name:Remove old stacks and files
           command: |
             if [[ "${STACKS[@]}" =~ "${OldWorkflowID}" ]]
               then
                 aws cloudformation delete-stack --stack-name backend-stack-${OldWorkflowID}
                 # aws s3 rm s3://bucket-name --recursive
-                aws s3 rm "s3://${OldWorkflowID}" --recursive
+                # aws s3 rm s3://${OldWorkflowID} --recursive
                 aws cloudformation delete-stack --stack-name frontend-stack-${OldWorkflowID}
             fi
 
